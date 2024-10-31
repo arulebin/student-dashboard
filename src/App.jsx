@@ -9,20 +9,24 @@ function App() {
   const [showSidebar, setShowSidebar] = useState(true);
 
   useEffect(() => {
-    const phNoinLS=JSON.parse(localStorage.getItem("phone"));
+    const phNoinLS=JSON.parse(localStorage.getItem("phone")) || "";
+    const iframeinLS=JSON.parse(localStorage.getItem("iframe")) || "https://www.sxcce.edu.in/mobile/dashboard.php?ph=";
     setPhone(phNoinLS);
+    setIframe(iframeinLS);
   }, [])
   
-  const saveToLS=(phone)=>{
+  const saveToLS=(phone,iframe)=>{
     localStorage.setItem("phone",JSON.stringify(phone));
+    localStorage.setItem("iframe",JSON.stringify(iframe));
   }
 
   const handleInput= (e) =>{
-    setIframe(`https://www.sxcce.edu.in/mobile/dashboard.php?ph=${phone}`)
+    const url=`https://www.sxcce.edu.in/mobile/dashboard.php?ph=${phone}`;
+    setIframe(url);
+    saveToLS(phone,url)
   }
   const handleChange =(e)=>{
     setPhone(e.target.value);
-    saveToLS(e.target.value);
   }
 
   const handleBtn=(e)=>{
