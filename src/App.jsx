@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import clgbg from './assets/College-Logo-with-College-Name-Transparent.png'
 import menu from './assets/menu.svg'
 import './App.css'
@@ -8,11 +8,21 @@ function App() {
   const [iframe, setIframe] = useState(`https://www.sxcce.edu.in/mobile/dashboard.php?ph=`)
   const [showSidebar, setShowSidebar] = useState(true);
 
+  useEffect(() => {
+    const phNoinLS=JSON.parse(localStorage.getItem("phone"));
+    setPhone(phNoinLS);
+  }, [])
+  
+  const saveToLS=(phone)=>{
+    localStorage.setItem("phone",JSON.stringify(phone));
+  }
+
   const handleInput= (e) =>{
     setIframe(`https://www.sxcce.edu.in/mobile/dashboard.php?ph=${phone}`)
   }
   const handleChange =(e)=>{
     setPhone(e.target.value);
+    saveToLS(e.target.value);
   }
 
   const handleBtn=(e)=>{
