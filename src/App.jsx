@@ -32,6 +32,7 @@ function App() {
   const handleBtn=(e)=>{
     const value= e.target.value;
     setIframe(`https://www.sxcce.edu.in/mobile/${value}.php?ph=${phone}`)
+    setShowSidebar(!showSidebar);
   }
   const toggleSidebar=()=>{
     setShowSidebar(!showSidebar);
